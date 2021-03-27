@@ -17,7 +17,7 @@
     <title>@yield('titulo') - Controle Pessoal</title>
 </head>
 
-<body style="background-color: rgb(204, 215, 216)">
+<body style="background-color: white">
 
     <nav class="navbar navbar-expand-md navbar-dark  " style="background-color: #312C99">
         <a class="navbar-brand text-white" href="{{ route('clientes.index') }}">Home</a>
@@ -70,7 +70,7 @@
 </body>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Models\Telefone;
 use Illuminate\Http\Request;
+
 
 class TelefoneController extends Controller
 {
@@ -91,5 +93,27 @@ class TelefoneController extends Controller
     public function destroy(Telefone $telefone)
     {
         //
+    }
+    public function removerTelefone(Telefone $id_telefone){
+        $id_telefone->delete();
+        $mensagem = "Número de Telefone Removido com sucesso!";
+        return redirect('clientes/'.$id_telefone->id_cliente.'/edit')->with('mensagem',$mensagem);
+    }
+    public function adicionarNumeros($id_cliente, Request $request){
+        
+        for ($i = 0; $i < count($request->phone); $i++) { //Não gravar o número se não tiver preenchido o campo
+            if ($request->phone[$i] == null || $request->phone[$i] == "" || $request->phone[$i] == " ") {
+                $mensagem = "Nenhum telefone Adicionado!";
+                return redirect('clientes/'.$id_cliente.'/edit')->with('mensagem',$mensagem);
+            } else { //Caso tenha preenchido o número, criar o telefone
+                Telefone::create([
+                    "numero_telefone" => $request->phone[$i],
+                    "id_cliente" => $id_cliente,
+                ]);
+            }
+        }
+        $mensagem = "Telefones Adicionados com Sucesso";
+        return redirect('clientes/'.$id_cliente.'/edit')->with('mensagem',$mensagem);
+
     }
 }

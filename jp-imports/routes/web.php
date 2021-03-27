@@ -20,6 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('clientes', ClienteController::class);
+Route::any('removerTelefone/{id_telefone}', [TelefoneController::class, 'removerTelefone'])->name('TelefoneController.removerTelefone');
+Route::any('adicionarNumeros/{id_cliente}', [TelefoneController::class, 'adicionarNumeros'])->name('TelefoneController.adicionarNumeros');
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

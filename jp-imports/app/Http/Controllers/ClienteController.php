@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Http\Controllers\TelefoneController;
+use App\Http\Requests\ClienteValidator;
 use App\Models\Telefone;
 
 class ClienteController extends Controller
@@ -35,7 +36,7 @@ class ClienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClienteValidator $request)
     {
         $cliente = Cliente::create($request->all());
         if($request->phone){
@@ -70,7 +71,8 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        //
+        $telefones = Telefone::where('id_cliente', $cliente->id)->get();
+        return view('clientes/edit', ['cliente'=>$cliente, 'telefones'=>$telefones]);
     }
 
     /**
@@ -80,9 +82,11 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(ClienteValidator $request, Cliente $cliente)
     {
-        //
+       $cliente->update($request->all());
+       $mensagem = "Dados de cliente editado com sucesso!";
+       return redirect('clientes/'.$cliente->id.'/edit')->with('mensagem', $mensagem);
     }
 
     /**
@@ -93,6 +97,10 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        //
+        //Achando os números de telefone deste cliente
+        Telefone::where('id_cliente', $cliente->id)->delete();
+        $cliente->delete();
+        $mensagem = "Cliente ". $cliente->nome. " Removido com sucesso!";
+        return redirect('clientes')->with('mensagem',$mensagem);
     }
 }

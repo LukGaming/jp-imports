@@ -25,6 +25,7 @@
             @endphp
         </div>
     @endif
+    <div class="border border-dark rounded" style="padding: 15px; margin-top:20px" >
     <h1>Cadastrando Clientes</h1>
     <form method="POST" action="{{ route('clientes.store') }}">
         @csrf
@@ -77,7 +78,7 @@
                         onclick="RemoverNumero(this)"> Remover Número</button>
                 </div>
         </div>
-        <button type="button" class="btn btn-success" id="adicionar">Adicionar mais números</button>
+        <button type="button" class="btn btn-success" id="adicionar" style="margin-top: 15px">Adicionar mais números</button>
         <br>
         @endif
 
@@ -91,13 +92,14 @@
 
 
     <br><br><br>
+</div>
     <script>
         $phones = $("#phones"); //Selecionando a div que irão os phone
         $btnAdicionar = $("#adicionar"); //Selecionando botão para adicionar
         $btnAdicionar.click(AdicionarNovoNumero); //Adicionando os novos campos de número
         function AdicionarNovoNumero(name) {
             $phones.append(
-                "<div class='div-numero'><br><br><input type='text' name='phone[]' id='phone'>&nbsp;&nbsp;<button type='button' class='btn btn-danger' onclick='RemoverNumero(this)'> Remover Número</button></div>"
+                "<div class='div-numero' style='margin-top: 10px'><input type='text' name='phone[]' id='phone'>&nbsp;&nbsp;<button type='button' class='btn btn-danger' onclick='RemoverNumero(this)'> Remover Número</button></div>"
             );
         }
 
