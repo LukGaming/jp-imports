@@ -18,5 +18,5 @@ class Produto extends Model
         "horario_criacao_produto",
         "dropship",
         "usuario_criador_produto"
-    ];  
+    ];
 }

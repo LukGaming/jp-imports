@@ -16,12 +16,11 @@ class CreateProdutosTable extends Migration
         Schema::create('produtos', function (Blueprint $table) {
             $table->id();
             $table->string("nome");
-            $table->string("descricao")->nullable();
+            $table->longText("descricao")->nullable();
             $table->string("valor")->nullable();
-            $table->integer("vendido")->nullable();
-            $table->dateTime("horario_compra");
-            $table->dateTime("horario_criacao_produto");
-            $table->integer("dropship");
+            $table->integer("vendido")->nullable()->default('0');
+            $table->date("horario_compra");
+            $table->integer("dropship")->default('0');
             $table->integer("usuario_criador_produto");
             $table->timestamps();
         });

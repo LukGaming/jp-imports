@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Produto;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ImagemProdutoController;
+use Illuminate\Support\Facades\Auth;
+use App\Models\ImagensProduto;
+use App\Models\User;
 
 class ProdutoController extends Controller
 {
@@ -14,7 +18,7 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -24,7 +28,7 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        return view('produtos/create');
     }
 
     /**
@@ -35,7 +39,14 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request['usuario_criador_produto'] = Auth::id();
+        $produto = Produto::create($request->all());
+        $imagens = $request->imagens_produto;
+        if (count($imagens) > 0) {
+            ImagemProdutoController::adicionarImagens($imagens, $produto->id);
+        }
+        $mensagem = "Produto Criado com sucesso!";
+        return redirect('produto/create')->with(['mensagem'=>$mensagem, 'ultimo_produto_cadastrado' => $produto->id]);
     }
 
     /**
@@ -46,7 +57,10 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        //
+        $usuario = User::where('id', $produto->usuario_criador_produto)->first();
+        $nome_usuario = $usuario->name;
+        $imagens = ImagensProduto::where('id_produto', $produto->id)->first();
+        return view('produtos/show', ['produto'=>$produto, 'imagens'=>$imagens, 'criador_produto'=>$nome_usuario]);
     }
 
     /**

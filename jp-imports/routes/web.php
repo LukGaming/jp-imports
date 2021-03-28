@@ -32,6 +32,9 @@ Route::any('adicionarImagem/{id_cliente}', [ImagemClienteController::class, 'adi
 Route::any('editarImagem/{id_cliente}', [ImagemClienteController::class, 'editarImagem'])->name('ImagemClienteController.editarImagem');
 
 
+/*Rotas Para Produtos*/
+Route::resource('produto', ProdutoController::class);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
