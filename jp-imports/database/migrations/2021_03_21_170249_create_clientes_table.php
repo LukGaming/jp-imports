@@ -19,8 +19,9 @@ class CreateClientesTable extends Migration
             $table->string("email")->nullable();
             $table->string("facebook")->nullable();
             $table->string("instagram")->nullable();
-            $table->string("descricao_cliente")->nullable();
+            $table->longText("descricao_cliente")->nullable();
             $table->integer("itens_vendidos")->default(0);
+            $table->string("caminho_imagem_cliente")->nullable();            
             $table->timestamps();
         });
     }

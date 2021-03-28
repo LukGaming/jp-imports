@@ -17,9 +17,8 @@ class Cliente extends Model
         "descricao_cliente",
         "facebook",        
         "instagram",       
-        "itens_vendidos"
+        "itens_vendidos",
+        "caminho_imagem_cliente"
     ];
-    public function telefonesUsuario(){
-        return $this->hasMany(Telefone::class);
-    }
+    
 }

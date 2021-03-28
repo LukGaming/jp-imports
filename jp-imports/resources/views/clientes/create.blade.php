@@ -25,74 +25,77 @@
             @endphp
         </div>
     @endif
-    <div class="border border-dark rounded" style="padding: 15px; margin-top:20px" >
-    <h1>Cadastrando Clientes</h1>
-    <form method="POST" action="{{ route('clientes.store') }}">
-        @csrf
-        <div class="form-group">
-            <label for="nome">Nome </label>
-            <input type="text" class="form-control" id="nome" placeholder="Nome do cliente" name="nome"
-                value="{{ old('nome') }}">
-        </div>
-        <div class="form-group">
-            <label for="email">Email do cliente</label>
-            <input type="text" class="form-control" id="email" placeholder="Email de contato do cliente" name="email"
-                value="{{ old('email') }}">
-        </div>
-        <div class="form-group">
-            <label for="descricao_cliente">Descrição do Cliente</label>
-            <textarea class="form-control" id="descricao_cliente" rows="3"
-                name="descricao_cliente">{{ old('descricao_cliente') }}</textarea>
-        </div>
-        <label for="basic-url">Facebook</label>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon3">facebook.com/</span>
+    <div class="border border-dark rounded" style="padding: 15px; margin-top:20px">
+        <h1>Cadastrando Clientes</h1>
+        <form method="POST" action="{{ route('clientes.store') }}" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <label for="nome">Nome </label>
+                <input type="text" class="form-control" id="nome" placeholder="Nome do cliente" name="nome"
+                    value="{{ old('nome') }}">
             </div>
-            <input type="text" class="form-control" id="facebook" placeholder="Link do facebook do cliente" name="facebook"
-                value="{{ old('facebook') }}">
-        </div>
-        <label for="basic-url">Instagram</label>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon3">instagram.com/</span>
+            <div class="form-group">
+                <label for="email">Email do cliente</label>
+                <input type="text" class="form-control" id="email" placeholder="Email de contato do cliente" name="email"
+                    value="{{ old('email') }}">
             </div>
-            <input type="text" class="form-control" id="instagram" placeholder="Link do instagram do cliente"
-                name="instagram" value="{{ old('instagram') }}">
-        </div>
-
-        <br>
-        <label for="phones">Telefones: </label><br>
-        <div class="form-group" id="phones">
-            @if (old('phone'))
-                @foreach (old('phone') as $phone)
-                    <div class="div-numero">
-                        <input type="text" name="phone[]" id="phone" value="{{ $phone }}">&nbsp;&nbsp;
-                        <button type="button" class="btn btn-danger" onclick="RemoverNumero(this)"> Remover Número</button>
-                    </div>
-                @endforeach
-                <button type="button" class="btn btn-success" id="adicionar">Adicionar mais números</button>
-            @else
-                <div class="div-numero">
-                    <input type="text" name="phone[]" id="phone">&nbsp;&nbsp;<button type="button" class="btn btn-danger"
-                        onclick="RemoverNumero(this)"> Remover Número</button>
+            <div class="form-group">
+                <label for="descricao_cliente">Descrição do Cliente</label>
+                <textarea class="form-control" id="descricao_cliente" rows="3"
+                    name="descricao_cliente">{{ old('descricao_cliente') }}</textarea>
+            </div>
+            <label for="basic-url">Facebook</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">facebook.com/</span>
                 </div>
-        </div>
-        <button type="button" class="btn btn-success" id="adicionar" style="margin-top: 15px">Adicionar mais números</button>
-        <br>
-        @endif
+                <input type="text" class="form-control" id="facebook" placeholder="Link do facebook do cliente"
+                    name="facebook" value="{{ old('facebook') }}">
+            </div>
+            <label for="basic-url">Instagram</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">instagram.com/</span>
+                </div>
+                <input type="text" class="form-control" id="instagram" placeholder="Link do instagram do cliente"
+                    name="instagram" value="{{ old('instagram') }}">
+            </div>
 
-        <br>
-        <br>
-        <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary" id="btnCriar">Cadastrar Cliente</button>
-        </div>
-    </form>
+            <br>
+            <label for="phones">Telefones: </label><br>
+            <div class="form-group" id="phones">
+                @if (old('phone'))
+                    @foreach (old('phone') as $phone)
+                        <div class="div-numero">
+                            <input type="text" name="phone[]" id="phone" value="{{ $phone }}">&nbsp;&nbsp;
+                            <button type="button" class="btn btn-danger" onclick="RemoverNumero(this)"> Remover
+                                Número</button>
+                        </div>
+                    @endforeach
+                    <button type="button" class="btn btn-success" id="adicionar">Adicionar mais números</button>
+                @else
+                    <div class="div-numero">
+                        <input type="text" name="phone[]" id="phone">&nbsp;&nbsp;<button type="button"
+                            class="btn btn-danger" onclick="RemoverNumero(this)"> Remover Número</button>
+                    </div>
+            </div>
+            <button type="button" class="btn btn-success" id="adicionar" style="margin-top: 15px">Adicionar mais
+                números</button>
+            <br>
+            @endif
+            <br><br>
+            <label for="imagem_cliente">Selecionar Imagem de cliente</label><br>
+            <input type="file" name="imagem_cliente">
+
+            <br>
+            <br>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary" id="btnCriar">Cadastrar Cliente</button>
+            </div>
+        </form>
     </div>
-
-
     <br><br><br>
-</div>
+    </div>
     <script>
         $phones = $("#phones"); //Selecionando a div que irão os phone
         $btnAdicionar = $("#adicionar"); //Selecionando botão para adicionar

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\TelefoneController;
 use App\Http\Requests\ClienteValidator;
 use App\Models\Telefone;
+use App\Http\Controllers\ImagemClienteController;
 
 class ClienteController extends Controller
 {
@@ -38,17 +39,25 @@ class ClienteController extends Controller
      */
     public function store(ClienteValidator $request)
     {
+        //Enviando imagem para ser salva
+        if ($request->imagem_cliente) {
+            $caminho_imagem = (new ImagemClienteController())->storeImage($request);
+            $request['caminho_imagem_cliente'] = $caminho_imagem;
+        } else {
+            $request['caminho_imagem_cliente'] = null;
+        }
+
         $cliente = Cliente::create($request->all());
-        if($request->phone){
+        if ($request->phone) {
             //Criar um controlador de Telefone, pois usaremos ele depois
             //Enviar os dados do request para salvar no telefone também
             $telefones = new TelefoneController();
             $telefones->store($request, $cliente);
         }
-        if($cliente){//Se cliente for cadastrado sem erros, retornar página de criar novamente
-            $mensagem = "Cliente ".$cliente->nome." criado com sucesso ";        
-            return redirect('clientes/create')->with(['mensagem'=> $mensagem, 'ultimo_cliente_cadastrado'=> $cliente->id] );
-        }        
+        if ($cliente) { //Se cliente for cadastrado sem erros, retornar página de criar novamente
+            $mensagem = "Cliente " . $cliente->nome . " criado com sucesso ";
+            return redirect('clientes/create')->with(['mensagem' => $mensagem, 'ultimo_cliente_cadastrado' => $cliente->id]);
+        }
     }
 
     /**
@@ -60,7 +69,7 @@ class ClienteController extends Controller
     public function show(Cliente $cliente)
     {
         $telefones = (new Telefone())->telefonesDoUsuario($cliente->id);
-        return view('clientes/show', ['cliente'=>$cliente, 'telefones'=>$telefones]);       
+        return view('clientes/show', ['cliente' => $cliente, 'telefones' => $telefones]);
     }
 
     /**
@@ -72,7 +81,7 @@ class ClienteController extends Controller
     public function edit(Cliente $cliente)
     {
         $telefones = Telefone::where('id_cliente', $cliente->id)->get();
-        return view('clientes/edit', ['cliente'=>$cliente, 'telefones'=>$telefones]);
+        return view('clientes/edit', ['cliente' => $cliente, 'telefones' => $telefones]);
     }
 
     /**
@@ -84,9 +93,9 @@ class ClienteController extends Controller
      */
     public function update(ClienteValidator $request, Cliente $cliente)
     {
-       $cliente->update($request->all());
-       $mensagem = "Dados de cliente editado com sucesso!";
-       return redirect('clientes/'.$cliente->id.'/edit')->with('mensagem', $mensagem);
+        $cliente->update($request->all());
+        $mensagem = "Dados de cliente editado com sucesso!";
+        return redirect('clientes/' . $cliente->id . '/edit')->with('mensagem', $mensagem);
     }
 
     /**
@@ -100,7 +109,7 @@ class ClienteController extends Controller
         //Achando os números de telefone deste cliente
         Telefone::where('id_cliente', $cliente->id)->delete();
         $cliente->delete();
-        $mensagem = "Cliente ". $cliente->nome. " Removido com sucesso!";
-        return redirect('clientes')->with('mensagem',$mensagem);
+        $mensagem = "Cliente " . $cliente->nome . " Removido com sucesso!";
+        return redirect('clientes')->with('mensagem', $mensagem);
     }
 }

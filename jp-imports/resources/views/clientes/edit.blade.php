@@ -119,9 +119,6 @@
                     </div>
                 </div>
             </div>
-
-
-
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal-97">
                 Adicionar mais números de telefone
             </button>
@@ -142,19 +139,17 @@
                                 @csrf
                                 <label for="phones">Telefones: </label><br>
                                 <div class="form-group" id="phones">
-
                                     <div class="div-numero">
                                         <input type="text" name="phone[]" id="phone">&nbsp;&nbsp;
                                         <button type="button" class="btn btn-danger" onclick="RemoverNumero(this)">
                                             Remover Número</button>
                                     </div>
                                 </div>
-
                                 <button type="button" class="btn btn-success" id="adicionar">Adicionar mais
                                     números</button>
                                 <br><br>
                                 <input type="submit" class="btn btn-primary" value="Salvar Números">
-                            </form>                          
+                            </form>
                         </div>
                         <!-- Modal footer -->
                         <div class="modal-footer">
@@ -163,22 +158,7 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
         @else
-
-
-
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-99">
                 Adicionando Telefones ao cliente
             </button>
@@ -218,8 +198,131 @@
                         </div>
                     </div>
                 </div>
+            </div>
         @endif
     </div>
+
+
+    <div class="border border-dark rounded" style="padding: 15px; margin-top:20px">
+        <div class="d-flex justify-content-center">
+            <h5>Editando Imagem do Cliente </h5>
+        </div>
+        @if ($cliente->caminho_imagem_cliente)
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal-55">
+            Remover Imagem de Cliente
+        </button>
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal-55">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Adicionar Telefones</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form action="{{route('ImagemClienteController.removerImagem', $cliente->id)}}"
+                            method="POST">
+                            @csrf
+                            <div class="border border-dark w-50" style="padding: 10px; margin: 5px">
+                                <img src="{{ asset($cliente->caminho_imagem_cliente) }}" class="w-100 ">
+                            </div>                 
+                            <input type="submit" class="btn btn-primary" value="Remover Imagem">
+                        </form>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal-58">
+            Editar Imagem do cliente
+        </button>
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal-58">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Adicionar Telefones</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form action="{{route('ImagemClienteController.editarImagem', $cliente->id)}}"
+                            method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="file" name="imagem_cliente"> <br><br>
+                            <input type="submit" class="btn btn-primary" value="Adicionar Imagem">
+                        </form>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @else
+            
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal-58">
+            Adicionar Imagem ao cliente
+        </button>
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal-58">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Adicionar Telefones</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form action="{{route('ImagemClienteController.adicionarImagem', $cliente->id)}}"
+                            method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="file" name="imagem_cliente"> <br><br>
+                            <input type="submit" class="btn btn-primary" value="Adicionar Imagem">
+                        </form>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @endif
+        
+
+
+
+
+
+        
+    </div>
+
+
 
     <script>
         $phones = $("#phones"); //Selecionando a div que irão os phone

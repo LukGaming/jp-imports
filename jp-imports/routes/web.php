@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ImagemClienteController;
 use App\Http\Controllers\TelefoneController;
 use App\Http\Controllers\ProdutoController;
 
@@ -19,10 +20,16 @@ use App\Http\Controllers\ProdutoController;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::resource('clientes', ClienteController::class);
+/*Rota para CRUD do telefone do Cliente*/
 Route::any('removerTelefone/{id_telefone}', [TelefoneController::class, 'removerTelefone'])->name('TelefoneController.removerTelefone');
 Route::any('adicionarNumeros/{id_cliente}', [TelefoneController::class, 'adicionarNumeros'])->name('TelefoneController.adicionarNumeros');
 
+/*Rota para CRUD da imagem do CLiente*/
+Route::any('removerImagem/{id_cliente}', [ImagemClienteController::class, 'removerImagem'])->name('ImagemClienteController.removerImagem');
+Route::any('adicionarImagem/{id_cliente}', [ImagemClienteController::class, 'adicionarImagem'])->name('ImagemClienteController.adicionarImagem');
+Route::any('editarImagem/{id_cliente}', [ImagemClienteController::class, 'editarImagem'])->name('ImagemClienteController.editarImagem');
 
 
 Route::get('/dashboard', function () {
