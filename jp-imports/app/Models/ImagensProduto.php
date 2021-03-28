@@ -13,5 +13,5 @@ class ImagensProduto extends Model
         'caminho_imagem_produto',
        'id_produto',
        'created_at'
-    ];   
+    ];
 }

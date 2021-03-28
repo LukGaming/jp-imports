@@ -58,8 +58,9 @@ class ProdutoController extends Controller
     public function show(Produto $produto)
     {
         $usuario = User::where('id', $produto->usuario_criador_produto)->first();
+        $imagens = Produto::find($produto->id)->ImagensProduto;
         $nome_usuario = $usuario->name;
-        $imagens = ImagensProduto::where('id_produto', $produto->id)->first();
+        $imagens = ImagensProduto::where('id_produto', $produto->id)->get();
         return view('produtos/show', ['produto'=>$produto, 'imagens'=>$imagens, 'criador_produto'=>$nome_usuario]);
     }
 

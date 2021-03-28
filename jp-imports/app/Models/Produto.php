@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ImagensProduto;
 
 class Produto extends Model
 {
@@ -19,4 +20,7 @@ class Produto extends Model
         "dropship",
         "usuario_criador_produto"
     ];
+    public function ImagensProduto(){
+        return $this->hasMany(ImagensProduto::class, 'id_produto');
+    }
 }
