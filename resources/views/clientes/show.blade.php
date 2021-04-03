@@ -20,8 +20,8 @@
                 <h5>Email: {{ $cliente->email }}</h5>
             </div>
             @if ($cliente->caminho_imagem_cliente)
-                <div class="border border-dark w-25" style="padding: 10px; margin: 5px">
-                    <img src="{{ asset($cliente->caminho_imagem_cliente) }}" class="w-100 ">
+            <div class="border border-dark rounded d-flex justify-content-center" style="padding: 10px; margin: 5px; " >
+                    <img src="{{ asset($cliente->caminho_imagem_cliente) }}" class="img-thumbnail  w-50" style="border-radius: 15px">
                 </div>
             @endif
             <h5 class="" style="padding: 10px; margin: 5px">Descrição</h5>

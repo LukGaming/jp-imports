@@ -26,16 +26,13 @@
             <div class="d-flex justify-content-end">
                 <input type="submit" value="Adicionar Nota" class="btn btn-success" style="margin: 10px">
             </div>
-
+        </form>
             @if ($notas_anteriores)
-
-                <div wire:poll.10000ms></div>
                 @foreach ($notas_anteriores->reverse() as $notas)
                     @if ($loop->first)
                         <hr>
                         <div class="border border-dark">
                     @endif
-
                     <div class="border border-dark" style="padding: 5px">
                         <div class="d-flex bd-highlight">
                             <div class="p-2 flex-grow-1 bd-highlight">
@@ -66,15 +63,7 @@
 
 @endif
 
-</form>
+
 
 </div>
 </div>
-<script>
-$("textarea").each(function () {
-    this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
-  }).on("input", function () {
-    this.style.height = "auto";
-    this.style.height = (this.scrollHeight) + "px";
-  });
-</script>

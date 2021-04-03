@@ -42,7 +42,8 @@ class ClientComments extends Component
             $this->notas_anteriores[$i]->created_by = $nome_usuario->name;
         }
     }
-    public function removerNota($id_nota){
+    public function removerNota($id_nota)
+    {
         $nome_usuario = DB::table('notas_clientes')->where('id', $id_nota)->delete();
         session()->flash('nota_removida', 'Nota removida com sucesso!');
     }
