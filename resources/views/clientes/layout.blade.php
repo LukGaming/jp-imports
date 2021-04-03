@@ -13,7 +13,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
+        @livewireStyles
     <title>@yield('titulo') - Controle Pessoal</title>
 </head>
 
@@ -64,9 +64,10 @@
             </div>
         @endif
     </nav>
-    <div class="container">
+    <div class="">
         @yield('conteudo')
     </div>    
+    @livewireScripts
 </body>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
