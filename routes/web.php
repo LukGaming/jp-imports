@@ -41,4 +41,6 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+/*Rota para busca do Produto */
+Route::any('search/clientes', [ClienteController::class , 'search'])->name('searchClientes');
 

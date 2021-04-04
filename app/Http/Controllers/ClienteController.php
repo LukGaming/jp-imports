@@ -112,4 +112,7 @@ class ClienteController extends Controller
         $mensagem = "Cliente " . $cliente->nome . " Removido com sucesso!";
         return redirect('clientes')->with('mensagem', $mensagem);
     }
+    public function search(){
+        return view('clientes/search');
+    }
 }

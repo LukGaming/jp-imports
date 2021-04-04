@@ -27,43 +27,40 @@
                 <input type="submit" value="Adicionar Nota" class="btn btn-success" style="margin: 10px">
             </div>
         </form>
-            @if ($notas_anteriores)
-                @foreach ($notas_anteriores->reverse() as $notas)
-                    @if ($loop->first)
-                        <hr>
-                        <div class="border border-dark">
-                    @endif
-                    <div class="border border-dark" style="padding: 5px">
-                        <div class="d-flex bd-highlight">
-                            <div class="p-2 flex-grow-1 bd-highlight">
-                                <h6>Nota Criada Por: {{ $notas->created_by }}</h6>
-                            </div>
-                            <div class="p-2 bd-highlight">
-                                <h6>Horário de Criação da Nota:
-                                    {{ \Carbon\Carbon::parse($notas->created_at)->format('d-m-Y h:i:s') }}
-                                </h6>
-                            </div>
-                            <div class="p-2 bd-highlight">
-                                <input class="btn btn-danger " type="reset" value="Remover Nota"
-                                    wire:click="removerNota({{ $notas->id }})">
-                            </div>
+        <div ></div>
+        @if ($notas_anteriores)
+            @foreach ($notas_anteriores->reverse() as $notas)
+                @if ($loop->first)
+                    <hr>
+                    <div class="border border-dark">
+                @endif
+                <div class="border border-dark" style="padding: 5px">
+                    <div class="d-flex bd-highlight">
+                        <div class="p-2 flex-grow-1 bd-highlight">
+                            <h6>Nota Criada Por: {{ $notas->created_by }}</h6>
                         </div>
-                        <hr>
-                        <h6>
-                            <pre>
+                        <div class="p-2 bd-highlight">
+                            <h6>Horário de Criação da Nota:
+                                {{ \Carbon\Carbon::parse($notas->created_at)->format('d-m-Y h:i:s') }}
+                            </h6>
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <input class="btn btn-danger " type="reset" value="Remover Nota"
+                                wire:click="removerNota({{ $notas->id }})">
+                        </div>
+                    </div>
+                    <hr>
+                    <h6>
+                        <pre>
                             {{ $notas->body }}
                         </pre>
-                        </h6>
-                    </div>
-                    @if ($loop->first)
+                    </h6>
+                </div>
+                @if ($loop->first)
     </div>
     @endif
     @endforeach
 </div>
-
 @endif
-
-
-
 </div>
 </div>

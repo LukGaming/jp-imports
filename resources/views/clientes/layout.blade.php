@@ -64,7 +64,7 @@
             </div>
         @endif
     </nav>
-    <div class="">
+    <div class="container">
         @yield('conteudo')
     </div>    
     @livewireScripts
