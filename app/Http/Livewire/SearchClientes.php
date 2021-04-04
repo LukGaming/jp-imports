@@ -13,7 +13,8 @@ class SearchClientes extends Component
     public $search;
     public $clientesThatCameFromSearch;
     public $count = 2;
-
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public function render()
     {
         $query = $this->searchClientes();
@@ -22,11 +23,11 @@ class SearchClientes extends Component
     public function searchClientes()
     {
         if ($this->search == "") {
-            return Cliente::all();
+            return Cliente::paginate(12);
         } else {
             return  DB::table('clientes')
                 ->where('nome', 'like', '%' . $this->search . '%')
-                ->get();
+                ->paginate(12);
         }
     }
 }

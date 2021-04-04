@@ -22,10 +22,10 @@
                         <h3 class="card-title mx-auto h5 " style="">{{ $cliente->nome }}</h3>
                         <div class=" bg-light text-dark">
                             <p class="card-text ">
-                                <div class="d-flex justify-content-center">
+                            <div class="d-flex justify-content-center">
                                 <img src=" {{ url($cliente->caminho_imagem_cliente) }}" alt="" class="img-fluid"
                                     style="height: 200px">
-                                </div>
+                            </div>
                             </p>
                         </div>
                         <a href="{{ url('clientes/' . $cliente->id) }}"
@@ -38,6 +38,7 @@
                     </div>
                 </div>
             @endforeach
+            {{$initialClientes->links()}}
         </div>
     @else
         <div class="row">
@@ -47,10 +48,10 @@
                         <h3 class="card-title mx-auto h5 " style="">{{ $cliente->nome }}</h3>
                         <div class=" bg-light text-dark">
                             <p class="card-text ">
-                                <div class="d-flex justify-content-center">
+                            <div class="d-flex justify-content-center">
                                 <img src=" {{ url($cliente->caminho_imagem_cliente) }}" alt="" class="img-fluid"
                                     style="height: 200px">
-                                </div>
+                            </div>
                             </p>
                         </div>
                         <a href="{{ url('clientes/' . $cliente->id) }}"
@@ -63,6 +64,7 @@
                     </div>
                 </div>
             @endforeach
+            {{$initialClientes->links()}}
         </div>
     @endif
 
