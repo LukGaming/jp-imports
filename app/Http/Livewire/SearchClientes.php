@@ -3,33 +3,30 @@
 namespace App\Http\Livewire;
 
 use App\Models\Cliente;
+use Illuminate\Cache\Console\ClearCommand;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-
+use Livewire\WithPagination;
 
 class SearchClientes extends Component
 {
     public $search;
     public $clientesThatCameFromSearch;
     public $count = 2;
+
     public function render()
     {
-        if ($this->search) {
-            $this->searchClientes();
-        }
-        return view('livewire.search-clientes');
+        $query = $this->searchClientes();
+        return view('livewire.search-clientes', ['initialClientes' => $query]);
     }
     public function searchClientes()
     {
-        $clientes = DB::table('clientes')
-            ->where('nome', 'like', '%' . $this->search . '%')
-            ->get();
-        if (count($clientes) > 0) {
-            $this->clientesThatCameFromSearch = $clientes;
-            $this->count = 1;
+        if ($this->search == "") {
+            return Cliente::all();
         } else {
-            $this->count = 0;
-            $this->clientesThatCameFromSearch = null;
+            return  DB::table('clientes')
+                ->where('nome', 'like', '%' . $this->search . '%')
+                ->get();
         }
     }
 }

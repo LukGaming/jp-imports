@@ -1,5 +1,5 @@
 <div style="padding-top: 10px;">
-    <form method="POST" wire:submit.prevent="searchClientes">
+    <form method="GET" wire:submit.prevent="searchClientes">
         @csrf
         <div class="row" style="padding-left: 10px">
             <label for="search" style="padding-left: 10px">Buscar Clientes</label>
@@ -12,36 +12,58 @@
         </div>
     </form>
 
-    @if ($clientesThatCameFromSearch != null && $search != '')
-        <div class="row ">
-            @if ($count == 1)
-                @foreach ($clientesThatCameFromSearch as $cliente)
-                    <div class="col-sm-4">
-                        <div class="card text-white  card-itens card-title " style=" padding: 3px">
-                            <h3 class="card-title mx-auto h5 " style="">{{ $cliente->nome }}</h3>
-                            <div class=" bg-light text-dark">
-                                <p class="card-text ">
-                                    <img src=" {{ url($cliente->caminho_imagem_cliente) }}" alt="" class="img-fluid" style="height: 200px">
-                                   </p>
-                            </div>
-                            <a href="{{ url('clientes/' . $cliente->id) }}"
-                                class="btn  stretched-link text-dark card-button-link" style="padding: 4px;  border-style: solid;
+
+    <!--Quando a página Carregar já aparecerá estes clientes-->
+    @if ($search == '')
+        <div class="row">
+            @foreach ($initialClientes as $cliente)
+                <div class="col-sm-4">
+                    <div class="card text-white  card-itens card-title " style=" padding: 3px">
+                        <h3 class="card-title mx-auto h5 " style="">{{ $cliente->nome }}</h3>
+                        <div class=" bg-light text-dark">
+                            <p class="card-text ">
+                                <div class="d-flex justify-content-center">
+                                <img src=" {{ url($cliente->caminho_imagem_cliente) }}" alt="" class="img-fluid"
+                                    style="height: 200px">
+                                </div>
+                            </p>
+                        </div>
+                        <a href="{{ url('clientes/' . $cliente->id) }}"
+                            class="btn  stretched-link text-dark card-button-link" style="padding: 4px;  border-style: solid;
+                        border-style: outset;
+                        border-color: #3E872E;
+                        border-width: 3px;">
+                            <h5>Ir para perfil do Cliente</h5>
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @else
+        <div class="row">
+            @foreach ($initialClientes as $cliente)
+                <div class="col-sm-4">
+                    <div class="card text-white  card-itens card-title " style=" padding: 3px">
+                        <h3 class="card-title mx-auto h5 " style="">{{ $cliente->nome }}</h3>
+                        <div class=" bg-light text-dark">
+                            <p class="card-text ">
+                                <div class="d-flex justify-content-center">
+                                <img src=" {{ url($cliente->caminho_imagem_cliente) }}" alt="" class="img-fluid"
+                                    style="height: 200px">
+                                </div>
+                            </p>
+                        </div>
+                        <a href="{{ url('clientes/' . $cliente->id) }}"
+                            class="btn  stretched-link text-dark card-button-link" style="padding: 4px;  border-style: solid;
                                         border-style: outset;
                                         border-color: #3E872E;
                                         border-width: 3px;">
-                                <h5>Ir para perfil do Cliente</h5>
-                            </a>
-                        </div>
+                            <h5>Ir para perfil do Cliente</h5>
+                        </a>
                     </div>
-                @endforeach
-            @endif
+                </div>
+            @endforeach
         </div>
-    @endif
-    @if ($count == 0 && $search != '')
-        Nenhum Cliente Encontrado
-    @endif
-    @if ($search == '')
-        Mostrando Todos os Clientes com paginação
     @endif
 
 </div>
