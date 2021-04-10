@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\ImagensProduto;
 use App\Models\Produto;
 use Livewire\Component;
 
@@ -29,11 +30,13 @@ class EditarProdutos extends Component
     {
         Produto::where('id', $this->produto)->update(
             [
-                'nome'=>$this->nome,
-                'descricao'=>$this->descricao,
-                'valor'=>$this->valor,
-                'horario_compra'=>$this->horario_compra
-            ]);
-            session()->flash('produto_editado', 'Produto editado com sucesso!');
+                'nome' => $this->nome,
+                'descricao' => $this->descricao,
+                'valor' => $this->valor,
+                'horario_compra' => $this->horario_compra
+            ]
+        );
+        session()->flash('produto_editado', 'Produto editado com sucesso!');
     }
+
 }
