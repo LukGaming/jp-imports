@@ -20,7 +20,6 @@ class ImagemClienteController extends Controller
     {
         //Pegando no banco de dados o caminho da imagem
         $path = $id_cliente->caminho_imagem_cliente; //Caminho da imagem do cliente
-
         if (file_exists($path)) { //Verificando se arquivo existe
             Storage::delete($path); //Remover Primeiramente do Disco
             unlink($path); //Depois de remover do disco remover da pasta pública
