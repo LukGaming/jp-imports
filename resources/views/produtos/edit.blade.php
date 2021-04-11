@@ -3,10 +3,13 @@
 @section('titulo', 'Home')
 
 @section('conteudo')
-    @livewireStyles
-    @livewire('editar-produtos', ['produto' => $produto->id])
-    @livewire('editar-imagens-produto', ['produto' => $produto->id])
-   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <div class="bg-dark text-light" style="margin-top: 20px">
+        @livewireStyles
+        @livewire('editar-produtos', ['produto' => $produto->id])
+        @livewire('editar-imagens-produto', ['produto' => $produto->id])
+        
+    </div>
     @livewireStyles
     <script>
         $phones = $("#phones"); //Selecionando a div que irão os phone
@@ -23,6 +26,5 @@
             console.log(obj);
             $('.div-numero').find(obj).parent().remove();
         }
-
     </script>
 @endsection

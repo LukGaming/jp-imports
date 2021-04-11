@@ -62,7 +62,7 @@
                 name="horario_compra" wire:model.defer="horario_compra">
         </div>
         <div class="d-flex justify-content-center">
-            <input type="submit" value="Salvar Alterações" class="btn btn-primary" wire:click="salvarAlteracoes()">
+            <input type="submit" value="Salvar Alterações" class="btn btn-success" wire:click="salvarAlteracoes()">
         </div>
 </div>
 </form>

@@ -38,9 +38,10 @@ class EditarImagensProduto extends Component
                 $caminho_imagem = str_replace("public/product/", "", $upload);
                 $caminho_imagem = "storage/product/" . $caminho_imagem;
                 ImagensProduto::create(['caminho_imagem_produto' => $caminho_imagem, 'id_produto' => $this->produto]);
-                //dd("Testando");
+                
             }
             $this->imagens = null;
+            $this->dispatchBrowserEvent('imagens_enviadas');
             //dd($this->imagens);
         } else {
             session()->flash('nenhuma_imagem_selecionada', 'Nenhuma imagem selecionada!');
