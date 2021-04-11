@@ -33,11 +33,15 @@ class EditarImagensProduto extends Component
     public function adicionarImagem()
     {
         if ($this->imagens) {
-            $upload = $this->imagens->storePublicly('public/product');
-            $caminho_imagem = str_replace("public/product/", "", $upload);
-            $caminho_imagem = "storage/product/" . $caminho_imagem;
-            ImagensProduto::create(['caminho_imagem_produto' => $caminho_imagem, 'id_produto' => $this->produto]);
-            //dd("Testando");
+            foreach ($this->imagens as $imagem) {
+                $upload = $imagem->storePublicly('public/product');
+                $caminho_imagem = str_replace("public/product/", "", $upload);
+                $caminho_imagem = "storage/product/" . $caminho_imagem;
+                ImagensProduto::create(['caminho_imagem_produto' => $caminho_imagem, 'id_produto' => $this->produto]);
+                //dd("Testando");
+            }
+            $this->imagens = null;
+            //dd($this->imagens);
         } else {
             session()->flash('nenhuma_imagem_selecionada', 'Nenhuma imagem selecionada!');
         }

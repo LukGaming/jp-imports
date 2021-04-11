@@ -27,6 +27,7 @@
                         pborder-dark div-img"> </p> @endif
                         <div class="border-dark rounded w-25 border" style="margin: 10px">
                             <div class="d-flex justify-content-end">
+                                
                                 <button class="btn btn-danger" type="submit" style="margin-top: 10px"
                                     wire:click="removerImagem({{ $imagens_produtos[$i]->id }}, '{{ $imagens_produtos[$i]->caminho_imagem_produto }}')">Remover</button>
                             </div>
@@ -59,8 +60,9 @@
                         </div>
                     </div>
                 @endif
-                <input type="file" name="image" id="image" wire:model="imagens"  style="padding: 20px">
-                <button class="btn btn-success" wire:click="adicionarImagem">Enviar Imagem</button>
+                <input type="file" name="image" id="image" wire:model="imagens"  style="padding: 20px" multiple>
+                
+                <button class="btn btn-success" wire:click="adicionarImagem" >Enviar Imagem</button>
             </div>
 
     </div>
