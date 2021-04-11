@@ -6,6 +6,7 @@
     @livewireStyles
     @livewire('editar-produtos', ['produto' => $produto->id])
     @livewire('editar-imagens-produto', ['produto' => $produto->id])
+   
     @livewireStyles
     <script>
         $phones = $("#phones"); //Selecionando a div que irão os phone
